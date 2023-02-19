@@ -17,7 +17,7 @@ func main() {
 	// Use the Get method to read to do items from file
 	if err := l.Get(todoFileName); err != nil {
 		fmt.Fprintln(os.Stderr, err)
-		ox.Exit(1)
+		os.Exit(1)
 	}
 
 	// Decide what to do based on the number of arguments provided
@@ -37,9 +37,9 @@ func main() {
 		l.Add(item)
 
 		// Save the new list
-		if err := l.Save(todoFileName); err != nill {
+		if err := l.Save(todoFileName); err != nil {
 			fmt.Fprintln(os.Stderr, err)
-			ox.Exit(1)
+			os.Exit(1)
 		}
 	}
 }
