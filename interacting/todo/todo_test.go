@@ -56,7 +56,7 @@ func TestDelete(t *testing.T) {
 		l.Add(v)
 	}
 
-	if [0].Task != tasks[0] {
+	if l[0].Task != tasks[0] {
 		t.Errorf("Expected %q, got %q instead.", tasks[0], l[0].Task)
 	}
 
@@ -66,39 +66,39 @@ func TestDelete(t *testing.T) {
 		t.Errorf("Expected list length %d, got %d instead.", 2, len(l))
 	}
 
-	if l[l].Task != tasks[2] {
+	if l[1].Task != tasks[2] {
 		t.Errorf("Expected %q, got %q instead.", tasks[2], l[1].Task)
 	}
+}
 
-	// TestSaveGet tests the Save and Get methods of the List type
-	func TestSaveGet(t *testing.T) {
-		l1 := todo.List{}
-		l2 := todo.List{}
+// TestSaveGet tests the Save and Get methods of the List type
+func TestSaveGet(t *testing.T) {
+	l1 := todo.List{}
+	l2 := todo.List{}
 
-		taskName := "New Task"
-		l1.Add(taskName)
+	taskName := "New Task"
+	l1.Add(taskName)
 
-		if l1[0].Task != taskName {
-			t.Errorf("Expected %q, got %q instead.", taskName, l1[0].Task)
-		}
+	if l1[0].Task != taskName {
+		t.Errorf("Expected %q, got %q instead.", taskName, l1[0].Task)
+	}
 
-		tf, err := ioutil.TempFile("", "")
+	tf, err := ioutil.TempFile("", "")
 
-		if err != nil {
-			t.Fatalf("Error creating temp file: %s", err)
-		}
-		defer os.Remove(tf.Name())
+	if err != nil {
+		t.Fatalf("Error creating temp file: %s", err)
+	}
+	defer os.Remove(tf.Name())
 
-		if err := l1.Save(tf.Name()); err != nil {
-			t.Fatalf("Error saving list to file: %s", err)
-		}
+	if err := l1.Save(tf.Name()); err != nil {
+		t.Fatalf("Error saving list to file: %s", err)
+	}
 
-		if err := l2.Get(tf.Name()); err != nil {
-			t.Fatalf("Error getting list from file: %s", err)
-		}
+	if err := l2.Get(tf.Name()); err != nil {
+		t.Fatalf("Error getting list from file: %s", err)
+	}
 
-		if l1[0].Task != l2[0].Task {
-			t.Errorf("Task %q should match %q task.", l1[0].Task, l2[0].Task)
-		}
+	if l1[0].Task != l2[0].Task {
+		t.Errorf("Task %q should match %q task.", l1[0].Task, l2[0].Task)
 	}
 }
