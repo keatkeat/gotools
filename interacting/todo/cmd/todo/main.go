@@ -5,13 +5,13 @@ import (
 	"os"
 	"strings"
 
-	"github.com/gotools/interacting/todo"
+	"github.com/keatkeat/gotools/interacting/todo"
 )
 
 //Hardcoding the file name
 const todoFileName = ".todo.json"
 
-func main()  {
+func main() {
 	//Define an items list
 	l := &todo.List{}
 	// Use the Get method to read to do items from file
@@ -23,7 +23,7 @@ func main()  {
 	// Decide what to do based on the number of arguments provided
 	switch {
 	// For no extra arguments, print the list
-	case len(os.Args) == 1;
+	case len(os.Args) == 1:
 		// List current to do items
 		for _, item := range *l {
 			fmt.Println(item.Task)
